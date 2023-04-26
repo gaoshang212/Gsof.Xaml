@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Gsof.Xaml.BlankWindow\Gsof.Xaml.BlankWindow.csproj" />
     <ProjectReference Include="..\Gsof.Xaml.Controls\Gsof.Xaml.Controls.csproj" />
   </ItemGroup>
 

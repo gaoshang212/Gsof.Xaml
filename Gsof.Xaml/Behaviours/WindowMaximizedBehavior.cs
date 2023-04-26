@@ -7,8 +7,6 @@ namespace Gsof.Xaml.Behaviours
 {
     public class WindowMaximizedBehavior : Behavior<ButtonBase>
     {
-        private Window _window;
-
         protected override void OnAttached()
         {
             base.OnAttached();
@@ -66,12 +64,7 @@ namespace Gsof.Xaml.Behaviours
 
         private Window GetWindow()
         {
-            if (_window == null)
-            {
-                _window = Window.GetWindow(AssociatedObject);
-            }
-
-            return _window;
+            return Window.GetWindow(AssociatedObject);
         }
     }
 }

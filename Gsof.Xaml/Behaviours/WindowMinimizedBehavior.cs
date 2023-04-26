@@ -6,8 +6,6 @@ namespace Gsof.Xaml.Behaviours
 {
     public class WindowMinimizedBehavior : Behavior<Button>
     {
-        private Window _window;
-
         protected override void OnAttached()
         {
             base.OnAttached();
@@ -22,17 +20,14 @@ namespace Gsof.Xaml.Behaviours
 
         private void OnButtonClick(object sender, RoutedEventArgs e)
         {
-            if (_window == null)
-            {
-                _window = Window.GetWindow(AssociatedObject);
-            }
+            var window = Window.GetWindow(AssociatedObject);
 
-            if (_window == null)
+            if (window == null)
             {
                 return;
             }
 
-            _window.WindowState = WindowState.Minimized;
+            window.WindowState = WindowState.Minimized;
         }
     }
 }
