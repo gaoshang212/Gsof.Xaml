@@ -731,7 +731,7 @@ namespace Gsof.Xaml.BlankWindow.Microsoft.Windows.Shell
             // maximized.  Not forcing this update will eventually cause the
             // default caption to be drawn.
             WindowState? state = null;
-            if (wParam.ToInt32() == SIZE_MAXIMIZED)
+            if (wParam.ToInt64() == SIZE_MAXIMIZED)
             {
                 state = WindowState.Maximized;
             }
