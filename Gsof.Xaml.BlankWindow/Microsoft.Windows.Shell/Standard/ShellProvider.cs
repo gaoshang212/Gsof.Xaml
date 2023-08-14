@@ -187,7 +187,7 @@ namespace Gsof.Xaml.BlankWindow.Microsoft.Windows.Shell.Standard
         RECENT,
     }
 
-    // IShellFolder::GetAttributesOf flags
+// IShellFolder::GetAttributesOf flags
     [Flags]
     internal enum SFGAO : uint
     {
@@ -440,7 +440,7 @@ namespace Gsof.Xaml.BlankWindow.Microsoft.Windows.Shell.Standard
 
     #region Interfaces
 
-    // Application File Extension and URL Protocol Registration
+// Application File Extension and URL Protocol Registration
     [
         ComImport,
         InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
@@ -865,7 +865,7 @@ namespace Gsof.Xaml.BlankWindow.Microsoft.Windows.Shell.Standard
         void MarkFullscreenWindow(IntPtr hwnd, [MarshalAs(UnmanagedType.Bool)] bool fFullscreen);
     }
 
-    // Used to remove items from the automatic destination lists created when apps or the system call SHAddToRecentDocs to report usage of a document.
+// Used to remove items from the automatic destination lists created when apps or the system call SHAddToRecentDocs to report usage of a document.
     [
         ComImport,
         InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
@@ -911,7 +911,7 @@ namespace Gsof.Xaml.BlankWindow.Microsoft.Windows.Shell.Standard
         object GetList([In] APPDOCLISTTYPE listtype, [In] uint cItemsDesired, [In] ref Guid riid);
     }
 
-    // Custom Destination List
+// Custom Destination List
     [
         ComImport,
         InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
@@ -1073,10 +1073,10 @@ namespace Gsof.Xaml.BlankWindow.Microsoft.Windows.Shell.Standard
     }
 
     [
-    ComImport,
-    InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
-    Guid(IID.FileDialogEvents),
-]
+        ComImport,
+        InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
+        Guid(IID.FileDialogEvents),
+    ]
     internal interface IFileDialogEvents
     {
         [PreserveSig]

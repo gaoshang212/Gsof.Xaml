@@ -35,7 +35,7 @@ namespace Gsof.Xaml.BlankWindow.Behaviours
                 windowChrome.IgnoreTaskbarOnMaximize = customWindow.IgnoreTaskbarOnMaximize;
                 windowChrome.UseNoneWindowStyle = true;//metroWindow.UseNoneWindowStyle;
                 System.ComponentModel.DependencyPropertyDescriptor.FromProperty(BlankWindow.IgnoreTaskbarOnMaximizeProperty, typeof(BlankWindow))
-                      .AddValueChanged(AssociatedObject, IgnoreTaskbarOnMaximizePropertyChangedCallback);
+                    .AddValueChanged(AssociatedObject, IgnoreTaskbarOnMaximizePropertyChangedCallback);
                 //System.ComponentModel.DependencyPropertyDescriptor.FromProperty(MetroWindow.UseNoneWindowStyleProperty, typeof(MetroWindow))
                 //      .AddValueChanged(AssociatedObject, UseNoneWindowStylePropertyChangedCallback);
             }
@@ -113,7 +113,7 @@ namespace Gsof.Xaml.BlankWindow.Behaviours
                 if (AssociatedObject is BlankWindow)
                 {
                     System.ComponentModel.DependencyPropertyDescriptor.FromProperty(BlankWindow.IgnoreTaskbarOnMaximizeProperty, typeof(BlankWindow))
-                          .RemoveValueChanged(AssociatedObject, IgnoreTaskbarOnMaximizePropertyChangedCallback);
+                        .RemoveValueChanged(AssociatedObject, IgnoreTaskbarOnMaximizePropertyChangedCallback);
                     //System.ComponentModel.DependencyPropertyDescriptor.FromProperty(MetroWindow.UseNoneWindowStyleProperty, typeof(MetroWindow))
                     //      .RemoveValueChanged(AssociatedObject, UseNoneWindowStylePropertyChangedCallback);
                 }

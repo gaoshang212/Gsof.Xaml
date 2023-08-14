@@ -288,7 +288,7 @@ namespace Gsof.Xaml.BlankWindow.Microsoft.Windows.Shell
             new PropertyMetadata(
                 SacrificialEdge.None,
                 (d, e) => ((WindowChrome)d)._OnPropertyChangedThatRequiresRepaint()),
-                _IsValidSacrificialEdge);
+            _IsValidSacrificialEdge);
 
         private static readonly SacrificialEdge SacrificialEdge_All = SacrificialEdge.Bottom | SacrificialEdge.Top | SacrificialEdge.Left | SacrificialEdge.Right;
 

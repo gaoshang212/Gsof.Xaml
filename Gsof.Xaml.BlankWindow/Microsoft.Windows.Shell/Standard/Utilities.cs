@@ -737,8 +737,8 @@ namespace Gsof.Xaml.BlankWindow.Microsoft.Windows.Shell.Standard
         private static bool _IsAsciiAlphaNumeric(byte b)
         {
             return (b >= 'a' && b <= 'z')
-                || (b >= 'A' && b <= 'Z')
-                || (b >= '0' && b <= '9');
+                   || (b >= 'A' && b <= 'Z')
+                   || (b >= '0' && b <= '9');
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]

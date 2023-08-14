@@ -93,10 +93,10 @@ namespace Gsof.Xaml.BlankWindow.Microsoft.Windows.Shell
             {
                 _messageTable.AddRange(new[] 
                 {
-                   new HANDLE_MESSAGE(WM.SETTINGCHANGE,         _HandleSettingChange),
-                   new HANDLE_MESSAGE(WM.ENTERSIZEMOVE,         _HandleEnterSizeMove),
-                   new HANDLE_MESSAGE(WM.EXITSIZEMOVE,          _HandleExitSizeMove),
-                   new HANDLE_MESSAGE(WM.MOVE,                  _HandleMove),
+                    new HANDLE_MESSAGE(WM.SETTINGCHANGE,         _HandleSettingChange),
+                    new HANDLE_MESSAGE(WM.ENTERSIZEMOVE,         _HandleEnterSizeMove),
+                    new HANDLE_MESSAGE(WM.EXITSIZEMOVE,          _HandleExitSizeMove),
+                    new HANDLE_MESSAGE(WM.MOVE,                  _HandleMove),
                 });
             }
         }
@@ -308,10 +308,10 @@ namespace Gsof.Xaml.BlankWindow.Microsoft.Windows.Shell
                 Rect rcLogicalClient = DpiHelper.DeviceRectToLogical(new Rect(rcAdjustedClient.Left, rcAdjustedClient.Top, rcAdjustedClient.Width, rcAdjustedClient.Height));
 
                 Thickness nonClientThickness = new Thickness(
-                   rcLogicalWindow.Left - rcLogicalClient.Left,
-                   rcLogicalWindow.Top - rcLogicalClient.Top,
-                   rcLogicalClient.Right - rcLogicalWindow.Right,
-                   rcLogicalClient.Bottom - rcLogicalWindow.Bottom);
+                    rcLogicalWindow.Left - rcLogicalClient.Left,
+                    rcLogicalWindow.Top - rcLogicalClient.Top,
+                    rcLogicalClient.Right - rcLogicalWindow.Right,
+                    rcLogicalClient.Bottom - rcLogicalWindow.Bottom);
 
                 templateFixupMargin = new Thickness(
                     0,

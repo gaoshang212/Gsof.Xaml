@@ -28,7 +28,7 @@ namespace Gsof.Xaml.BlankWindow
         }
 
         public static readonly DependencyProperty IgnoreTaskbarOnMaximizeProperty =
-          DependencyProperty.Register("IgnoreTaskbarOnMaximize", typeof(bool), typeof(BlankWindow), new PropertyMetadata(false));
+            DependencyProperty.Register("IgnoreTaskbarOnMaximize", typeof(bool), typeof(BlankWindow), new PropertyMetadata(false));
 
         public Brush GlowBrush
         {
