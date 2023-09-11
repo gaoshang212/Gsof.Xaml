@@ -18,13 +18,16 @@ namespace Gsof.Xaml.Extensions
         /// <param name="element"></param>
         /// <param name="p_func"></param>
         /// <returns></returns>
-        public static T ParentOfType<T>(this DependencyObject element, Func<T, bool> p_func = null) where T : DependencyObject
+        public static T? ParentOfType<T>(this DependencyObject? element, Func<T?, bool>? p_func = null) where T : DependencyObject
         {
-            if (element == null) return null;
-            DependencyObject parent = VisualTreeHelper.GetParent(element);
-            while (parent != null && (!(parent is T) || (p_func != null && !p_func(parent as T))))
+            if (element == null)
             {
-                DependencyObject newVisualParent = VisualTreeHelper.GetParent(parent);
+                return null;
+            }
+            var parent = VisualTreeHelper.GetParent(element);
+            while (parent != null && (!(parent is T t) || (p_func != null && !p_func(t))))
+            {
+                var newVisualParent = VisualTreeHelper.GetParent(parent);
                 if (newVisualParent != null)
                 {
                     parent = newVisualParent;
@@ -32,9 +35,9 @@ namespace Gsof.Xaml.Extensions
                 else
                 {
                     // try to get the logical parent ( e.g. if in Popup)
-                    if (parent is FrameworkElement)
+                    if (parent is FrameworkElement frameworkElement)
                     {
-                        parent = (parent as FrameworkElement).Parent;
+                        parent = frameworkElement.Parent;
                     }
                     else
                     {
@@ -52,21 +55,20 @@ namespace Gsof.Xaml.Extensions
         /// <param name="p_element"></param>
         /// <param name="p_func"></param>
         /// <returns></returns>
-        public static T ChildOfType<T>(this DependencyObject p_element, Func<T, bool> p_func = null) where T : DependencyObject
+        public static T? ChildOfType<T>(this DependencyObject p_element, Func<T, bool>? p_func = null) where T : DependencyObject
         {
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(p_element); i++)
             {
                 var child = VisualTreeHelper.GetChild(p_element, i);
+
                 if (child == null)
                 {
                     continue;
                 }
 
-                var t = child as T;
-
-                if (t != null && (p_func == null || p_func(t)))
+                if (child is T t && (p_func == null || p_func(t)))
                 {
-                    return (T)child;
+                    return t;
                 }
 
                 var grandChild = child.ChildOfType(p_func);
@@ -84,7 +86,7 @@ namespace Gsof.Xaml.Extensions
         /// <param name="p_element"></param>
         /// <param name="p_func"></param>
         /// <returns></returns>
-        public static IEnumerable<T> ChildrenOfType<T>(this DependencyObject p_element, Func<T, bool> p_func = null) where T : DependencyObject
+        public static IEnumerable<T> ChildrenOfType<T>(this DependencyObject p_element, Func<T, bool>? p_func = null) where T : DependencyObject
         {
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(p_element); i++)
             {
@@ -94,9 +96,8 @@ namespace Gsof.Xaml.Extensions
                     continue;
                 }
 
-                if (child is T)
+                if (child is T t)
                 {
-                    var t = (T)child;
                     if (p_func != null && !p_func(t))
                     {
                         continue;
@@ -119,7 +120,7 @@ namespace Gsof.Xaml.Extensions
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="p_dependencyObject"></param>
-        private static BehaviorCollection RemoveBehaviorInternal<T>(this DependencyObject p_dependencyObject) where T : Behavior, new()
+        private static BehaviorCollection? RemoveBehaviorInternal<T>(this DependencyObject? p_dependencyObject) where T : Behavior, new()
         {
             if (p_dependencyObject == null)
             {
@@ -146,15 +147,11 @@ namespace Gsof.Xaml.Extensions
         /// <typeparam name="T"></typeparam>
         /// <param name="p_dependencyObject"></param>
         /// <param name="p_onlyRemove">是否只移除</param>
-        public static void ApplyBehavior<T>(this DependencyObject p_dependencyObject, bool p_onlyRemove = false) where T : Behavior, new()
+        public static void ApplyBehavior<T>(this DependencyObject? p_dependencyObject, bool p_onlyRemove = false) where T : Behavior, new()
         {
             var deo = p_dependencyObject;
-            if (deo == null)
-            {
-                return;
-            }
 
-            var itemBehaviors = deo.RemoveBehaviorInternal<T>();
+            var itemBehaviors = deo?.RemoveBehaviorInternal<T>();
             if (itemBehaviors == null)
             {
                 return;
@@ -181,7 +178,7 @@ namespace Gsof.Xaml.Extensions
         /// </summary>
         /// <param name="p_dependencyObject"></param>
         /// <returns></returns>
-        public static Window GetWindow(this DependencyObject p_dependencyObject)
+        public static Window? GetWindow(this DependencyObject p_dependencyObject)
         {
             if (p_dependencyObject == null)
             {
@@ -196,7 +193,7 @@ namespace Gsof.Xaml.Extensions
         /// </summary>
         /// <param name="p_element"></param>
         /// <returns></returns>
-        public static IEnumerable<BindingExpression> GetBindingExpressions(this DependencyObject p_element)
+        public static IEnumerable<BindingExpression> GetBindingExpressions(this DependencyObject? p_element)
         {
             var element = p_element;
             if (element == null)
@@ -208,7 +205,13 @@ namespace Gsof.Xaml.Extensions
 
             foreach (var dp in dps)
             {
-                BindingExpression be = BindingOperations.GetBindingExpression(element, (DependencyProperty)dp.GetValue(element)!);
+                var dpv = (DependencyProperty)dp.GetValue(element);
+                if (dpv == null)
+                {
+                    continue;
+                }
+
+                var be = BindingOperations.GetBindingExpression(element, dpv);
                 if (be == null)
                 {
                     continue;
@@ -224,7 +227,7 @@ namespace Gsof.Xaml.Extensions
         /// <param name="p_element"></param>
         /// <param name="p_func"></param>
         /// <returns></returns>
-        public static IEnumerable<T> LogicalChildrenOfType<T>(this DependencyObject p_element, Func<T, bool>? p_func = null)
+        public static IEnumerable<T> LogicalChildrenOfType<T>(this DependencyObject? p_element, Func<T, bool>? p_func = null)
         {
             var element = p_element;
             if (element == null)
