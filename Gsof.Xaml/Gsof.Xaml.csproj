@@ -8,8 +8,8 @@
 		<LangVersion>10.0</LangVersion>
 		<PackageProjectUrl>https://github.com/gaoshang212/Gsof.Xaml</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/gaoshang212/Gsof.Xaml.git</RepositoryUrl>
-		<AssemblyVersion>0.3.3</AssemblyVersion>
-		<VersionPrefix>0.3.3</VersionPrefix>
+		<AssemblyVersion>0.3.4</AssemblyVersion>
+		<VersionPrefix>0.3.4</VersionPrefix>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	</PropertyGroup>

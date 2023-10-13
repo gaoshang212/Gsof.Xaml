@@ -31,9 +31,9 @@ namespace Gsof.Xaml.Extensions
         /// <returns>坐标值</returns>
         public static Point GetRelativePosition(this UIElement source, UIElement p_relative)
         {
-            Point pt = new Point();
-            MatrixTransform mat = source.TransformToVisual(p_relative) as MatrixTransform;
-            if (mat != null)
+            var pt = new Point();
+
+            if (source.TransformToVisual(p_relative) is MatrixTransform mat)
             {
                 pt.X = mat.Matrix.OffsetX;
                 pt.Y = mat.Matrix.OffsetY;
