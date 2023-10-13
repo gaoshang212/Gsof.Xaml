@@ -120,7 +120,7 @@ namespace Gsof.Xaml.Extensions
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="p_dependencyObject"></param>
-        private static BehaviorCollection? RemoveBehaviorInternal<T>(this DependencyObject? p_dependencyObject) where T : Behavior, new()
+        private static BehaviorCollection? RemoveBehaviorInternal<T>(this DependencyObject? p_dependencyObject) where T : Behavior
         {
             if (p_dependencyObject == null)
             {
@@ -128,13 +128,8 @@ namespace Gsof.Xaml.Extensions
             }
 
             BehaviorCollection itemBehaviors = Interaction.GetBehaviors(p_dependencyObject);
-            foreach (var behavior in itemBehaviors)
+            foreach (var behavior in itemBehaviors.OfType<T>())
             {
-                if (!(behavior is T))
-                {
-                    continue;
-                }
-
                 itemBehaviors.Remove(behavior);
             }
 
@@ -149,6 +144,11 @@ namespace Gsof.Xaml.Extensions
         /// <param name="p_onlyRemove">是否只移除</param>
         public static void ApplyBehavior<T>(this DependencyObject? p_dependencyObject, bool p_onlyRemove = false) where T : Behavior, new()
         {
+            p_dependencyObject.ApplyBehavior(new T());
+        }
+
+        public static void ApplyBehavior<T>(this DependencyObject? p_dependencyObject, T? t, bool p_onlyRemove = false) where T : Behavior
+        {
             var deo = p_dependencyObject;
 
             var itemBehaviors = deo?.RemoveBehaviorInternal<T>();
@@ -157,9 +157,9 @@ namespace Gsof.Xaml.Extensions
                 return;
             }
 
-            if (!p_onlyRemove)
+            if (!p_onlyRemove && t != null)
             {
-                itemBehaviors.Add(new T());
+                itemBehaviors.Add(t);
             }
         }
 
@@ -168,7 +168,7 @@ namespace Gsof.Xaml.Extensions
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="p_dependencyObject"></param>
-        public static void RemoveBehavior<T>(this DependencyObject p_dependencyObject) where T : Behavior, new()
+        public static void RemoveBehavior<T>(this DependencyObject p_dependencyObject) where T : Behavior
         {
             p_dependencyObject.RemoveBehaviorInternal<T>();
         }
@@ -205,7 +205,7 @@ namespace Gsof.Xaml.Extensions
 
             foreach (var dp in dps)
             {
-                var dpv = (DependencyProperty)dp.GetValue(element);
+                var dpv = dp.GetValue(element) as DependencyProperty;
                 if (dpv == null)
                 {
                     continue;
