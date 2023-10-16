@@ -16,10 +16,15 @@ public static class FrameworkElementExtension
     {
         if (element.IsLoaded)
         {
+#if NET46_OR_GREATER
             return Task.CompletedTask;
+#else
+            return Task.FromResult(true);
+#endif
+
         }
 
-        var tsc = new TaskCompletionSource();
+        var tsc = new TaskCompletionSource<bool>();
 
         SetTaskCompletionSource(element, tsc);
         element.Loaded += OnElementLoaded;
@@ -43,20 +48,20 @@ public static class FrameworkElementExtension
             return;
         }
         SetTaskCompletionSource(fe, null);
-        tsc.SetResult();
+        tsc.SetResult(true);
     }
 
 
-    public static TaskCompletionSource? GetTaskCompletionSource(DependencyObject obj)
+    public static TaskCompletionSource<bool>? GetTaskCompletionSource(DependencyObject obj)
     {
-        return (TaskCompletionSource?)obj.GetValue(TaskCompletionSourceProperty);
+        return (TaskCompletionSource<bool>?)obj.GetValue(TaskCompletionSourceProperty);
     }
-    public static void SetTaskCompletionSource(DependencyObject obj, TaskCompletionSource? value)
+    public static void SetTaskCompletionSource(DependencyObject obj, TaskCompletionSource<bool>? value)
     {
         obj.SetValue(TaskCompletionSourceProperty, value);
     }
     public static readonly DependencyProperty TaskCompletionSourceProperty =
-        DependencyProperty.RegisterAttached("TaskCompletionSource", typeof(TaskCompletionSource), typeof(FrameworkElementExtension), new PropertyMetadata(null));
+        DependencyProperty.RegisterAttached("TaskCompletionSource", typeof(TaskCompletionSource<bool>), typeof(FrameworkElementExtension), new PropertyMetadata(null));
 
 
 }
