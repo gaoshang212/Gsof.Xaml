@@ -147,6 +147,9 @@ namespace Gsof.Xaml.Extensions
             p_dependencyObject.ApplyBehavior(new T());
         }
 
+        /// <summary>
+        /// 行为应用
+        /// </summary>
         public static void ApplyBehavior<T>(this DependencyObject? p_dependencyObject, T? t, bool p_onlyRemove = false) where T : Behavior
         {
             var deo = p_dependencyObject;
@@ -171,6 +174,30 @@ namespace Gsof.Xaml.Extensions
         public static void RemoveBehavior<T>(this DependencyObject p_dependencyObject) where T : Behavior
         {
             p_dependencyObject.RemoveBehaviorInternal<T>();
+        }
+
+        /// <summary>
+        /// 获取行为
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="p_dependencyObject"></param>
+        /// <returns></returns>
+        public static T? GetBehavior<T>(this DependencyObject p_dependencyObject) where T : Behavior
+        {
+            var behaviors = Interaction.GetBehaviors(p_dependencyObject);
+            return behaviors.OfType<T>().FirstOrDefault();
+        }
+
+        /// <summary>
+        /// 是否有存在行为
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="p_dependencyObject"></param>
+        /// <returns></returns>
+        public static bool HasBehavior<T>(this DependencyObject p_dependencyObject) where T : Behavior
+        {
+            var behaviors = Interaction.GetBehaviors(p_dependencyObject);
+            return behaviors.OfType<T>().Any();
         }
 
         /// <summary>
