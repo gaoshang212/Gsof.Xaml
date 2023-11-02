@@ -67,7 +67,7 @@ namespace Gsof.Xaml.BlankWindow
             AddHandler(MouseDownEvent, new MouseButtonEventHandler(TitleBarMouseDown), true);
         }
 
-        protected void TitleBarMouseDown(object sender, MouseButtonEventArgs e)
+        protected virtual void TitleBarMouseDown(object sender, MouseButtonEventArgs e)
         {
             var draggable = GetDraggable((DependencyObject)e.Source) || GetDraggable((DependencyObject)e.OriginalSource);
             if (!draggable)
