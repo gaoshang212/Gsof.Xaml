@@ -28,7 +28,7 @@ namespace Gsof.Xaml.BlankWindow
         }
 
         public static readonly DependencyProperty IgnoreTaskbarOnMaximizeProperty =
-          DependencyProperty.Register("IgnoreTaskbarOnMaximize", typeof(bool), typeof(BlankWindow), new PropertyMetadata(false));
+            DependencyProperty.Register("IgnoreTaskbarOnMaximize", typeof(bool), typeof(BlankWindow), new PropertyMetadata(false));
 
         public Brush GlowBrush
         {
@@ -67,7 +67,7 @@ namespace Gsof.Xaml.BlankWindow
             AddHandler(MouseDownEvent, new MouseButtonEventHandler(TitleBarMouseDown), true);
         }
 
-        protected void TitleBarMouseDown(object sender, MouseButtonEventArgs e)
+        protected virtual void TitleBarMouseDown(object sender, MouseButtonEventArgs e)
         {
             var draggable = GetDraggable((DependencyObject)e.Source) || GetDraggable((DependencyObject)e.OriginalSource);
             if (!draggable)

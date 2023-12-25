@@ -7,7 +7,7 @@ namespace Gsof.Xaml.Behaviours
 {
     public class PopupFollowBehavior : Behavior<Popup>
     {
-        private Window _window;
+        private Window? _window;
 
         protected override void OnAttached()
         {

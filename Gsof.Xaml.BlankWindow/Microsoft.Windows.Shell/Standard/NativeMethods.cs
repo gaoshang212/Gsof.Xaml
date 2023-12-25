@@ -10,9 +10,10 @@ using System.Text;
 using Microsoft.Win32.SafeHandles;
 
 namespace Gsof.Xaml.BlankWindow.Microsoft.Windows.Shell.Standard
-{
+
     // Some COM interfaces and Win32 structures are already declared in the framework.
-    // Interesting ones to remember in System.Runtime.InteropServices.ComTypes are:
+// Interesting ones to remember in System.Runtime.InteropServices.ComTypes are:
+{
     using IStream = System.Runtime.InteropServices.ComTypes.IStream;
 
     #region Native Values
@@ -1733,7 +1734,7 @@ namespace Gsof.Xaml.BlankWindow.Microsoft.Windows.Shell.Standard
         public RGBQUAD bmiColors;
     }
 
-    // Win7 only.
+// Win7 only.
     [StructLayout(LayoutKind.Sequential)]
     internal struct CHANGEFILTERSTRUCT
     {
@@ -1788,7 +1789,7 @@ namespace Gsof.Xaml.BlankWindow.Microsoft.Windows.Shell.Standard
         public STATE_SYSTEM rgstate_CloseButton;
     }
 
-    // New to Vista.
+// New to Vista.
     [StructLayout(LayoutKind.Sequential)]
     internal struct TITLEBARINFOEX
     {
@@ -2182,9 +2183,9 @@ namespace Gsof.Xaml.BlankWindow.Microsoft.Windows.Shell.Standard
             {
                 var rc = (RECT)obj;
                 return rc._bottom == _bottom
-                    && rc._left == _left
-                    && rc._right == _right
-                    && rc._top == _top;
+                       && rc._left == _left
+                       && rc._right == _right
+                       && rc._top == _top;
             }
             catch (InvalidCastException)
             {
@@ -2531,7 +2532,7 @@ namespace Gsof.Xaml.BlankWindow.Microsoft.Windows.Shell.Standard
     /// <summary>Delegate declaration that matches managed WndProc signatures.</summary>
     internal delegate IntPtr MessageHandler(WM uMsg, IntPtr wParam, IntPtr lParam, out bool handled);
 
-    // Some native methods are shimmed through public versions that handle converting failures into thrown exceptions.
+// Some native methods are shimmed through public versions that handle converting failures into thrown exceptions.
     internal static class NativeMethods
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
@@ -3018,8 +3019,8 @@ namespace Gsof.Xaml.BlankWindow.Microsoft.Windows.Shell.Standard
 
             // This will throw if the theme service is not active (e.g. not UxTheme!IsThemeActive).
             _GetCurrentThemeName(fileNameBuilder, fileNameBuilder.Capacity,
-                                 colorBuilder, colorBuilder.Capacity,
-                                 sizeBuilder, sizeBuilder.Capacity)
+                    colorBuilder, colorBuilder.Capacity,
+                    sizeBuilder, sizeBuilder.Capacity)
                 .ThrowIfFailed();
 
             themeFileName = fileNameBuilder.ToString();
@@ -3147,7 +3148,7 @@ namespace Gsof.Xaml.BlankWindow.Microsoft.Windows.Shell.Standard
         {
             WINDOWINFO info = new WINDOWINFO()
             {
-                 cbSize = Marshal.SizeOf(typeof(WINDOWINFO))
+                cbSize = Marshal.SizeOf(typeof(WINDOWINFO))
             };
             if (!_GetWindowInfo(hWnd, ref info))
             {

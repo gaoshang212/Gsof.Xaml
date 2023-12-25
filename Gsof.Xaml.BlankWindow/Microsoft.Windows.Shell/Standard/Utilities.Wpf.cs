@@ -107,8 +107,8 @@ namespace Gsof.Xaml.BlankWindow.Microsoft.Windows.Shell.Standard
         private static int _MatchImage(BitmapFrame frame, int bitDepth, int width, int height, int bpp)
         {
             int score = 2 * _WeightedAbs(bpp, bitDepth, false) +
-                    _WeightedAbs(frame.PixelWidth, width, true) +
-                    _WeightedAbs(frame.PixelHeight, height, true);
+                        _WeightedAbs(frame.PixelWidth, width, true) +
+                        _WeightedAbs(frame.PixelHeight, height, true);
 
             return score;
         }

@@ -86,7 +86,8 @@
                     Style="{DynamicResource ClockStyle}" />
 
         <gsof:NumericUpDown Height="27"
-                            Maximum="4"
+                            Maximum="15"
+                            Minimum="10"
                             Value="{Binding Value,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></gsof:NumericUpDown>
 
         <gsof:MarqueeTextBlock Text="测试测试测试测试测试测试" Width="150" Background="Transparent" />

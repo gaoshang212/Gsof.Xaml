@@ -7,6 +7,9 @@ namespace Gsof.Xaml.Converters
 {
     public sealed class BooleanToReVisibilityConverter : IValueConverter
     {
+        /// <summary> Gets the default instance </summary>
+        public static BooleanToReVisibilityConverter Instance { get; } = new ();
+
         /// <summary> 
         /// Convert bool or Nullable&lt;bool&gt; to Reverse Visibility
         /// </summary> 
