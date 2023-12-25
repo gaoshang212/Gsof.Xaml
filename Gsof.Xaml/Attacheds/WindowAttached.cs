@@ -74,9 +74,9 @@ namespace Gsof.Xaml.Attacheds
         // Using a DependencyProperty as the backing store for DragMoveable.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty DragMoveableProperty =
             DependencyProperty.RegisterAttached("DragMoveable", typeof(bool), typeof(WindowAttached), new PropertyMetadata(false, (o, args) =>
-                 {
-                     o.ApplyBehavior<WindowDragMoveableBehavior>(!(bool)args.NewValue);
-                 }));
+            {
+                o.ApplyBehavior<WindowDragMoveableBehavior>(!(bool)args.NewValue);
+            }));
 
 
     }

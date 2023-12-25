@@ -298,7 +298,7 @@ namespace Gsof.Xaml.Controls
         // Value changed
         private static readonly RoutedEvent ValueChangedEvent =
             EventManager.RegisterRoutedEvent("ValueChanged", RoutingStrategy.Bubble,
-            typeof(RoutedEventHandler), typeof(NumericUpDown));
+                typeof(RoutedEventHandler), typeof(NumericUpDown));
 
         /// <summary>The ValueChanged event is called when the TextBoxValue of the control changes.</summary>
         public event RoutedEventHandler ValueChanged

@@ -62,19 +62,19 @@ namespace Gsof.Xaml.BlankWindow
                     getWidth = (rect) => glowSize;
                     getHeight = (rect) => rect.Height + 4;
                     getHitTestValue = p => new Rect(0, 0, ActualWidth, edgeSize).Contains(p)
-                                               ? HitTestValues.HTTOPLEFT
-                                               : new Rect(0, ActualHeight - edgeSize, ActualWidth, edgeSize).Contains(p)
-                                                     ? HitTestValues.HTBOTTOMLEFT
-                                                     : HitTestValues.HTLEFT;
+                        ? HitTestValues.HTTOPLEFT
+                        : new Rect(0, ActualHeight - edgeSize, ActualWidth, edgeSize).Contains(p)
+                            ? HitTestValues.HTBOTTOMLEFT
+                            : HitTestValues.HTLEFT;
                     getCursor = p =>
                     {
                         return (owner.ResizeMode == ResizeMode.NoResize || owner.ResizeMode == ResizeMode.CanMinimize)
-                                    ? owner.Cursor
-                                    : new Rect(0, 0, ActualWidth, edgeSize).Contains(p)
-                                         ? Cursors.SizeNWSE
-                                         : new Rect(0, ActualHeight - edgeSize, ActualWidth, edgeSize).Contains(p)
-                                               ? Cursors.SizeNESW
-                                               : Cursors.SizeWE;
+                            ? owner.Cursor
+                            : new Rect(0, 0, ActualWidth, edgeSize).Contains(p)
+                                ? Cursors.SizeNWSE
+                                : new Rect(0, ActualHeight - edgeSize, ActualWidth, edgeSize).Contains(p)
+                                    ? Cursors.SizeNESW
+                                    : Cursors.SizeWE;
                     };
                     break;
                 case GlowDirection.Right:
@@ -85,19 +85,19 @@ namespace Gsof.Xaml.BlankWindow
                     getWidth = (rect) => glowSize;
                     getHeight = (rect) => rect.Height + 4;
                     getHitTestValue = p => new Rect(0, 0, ActualWidth, edgeSize).Contains(p)
-                                               ? HitTestValues.HTTOPRIGHT
-                                               : new Rect(0, ActualHeight - edgeSize, ActualWidth, edgeSize).Contains(p)
-                                                     ? HitTestValues.HTBOTTOMRIGHT
-                                                     : HitTestValues.HTRIGHT;
+                        ? HitTestValues.HTTOPRIGHT
+                        : new Rect(0, ActualHeight - edgeSize, ActualWidth, edgeSize).Contains(p)
+                            ? HitTestValues.HTBOTTOMRIGHT
+                            : HitTestValues.HTRIGHT;
                     getCursor = p =>
                     {
                         return (owner.ResizeMode == ResizeMode.NoResize || owner.ResizeMode == ResizeMode.CanMinimize)
-                                    ? owner.Cursor
-                                    : new Rect(0, 0, ActualWidth, edgeSize).Contains(p)
-                                         ? Cursors.SizeNESW
-                                         : new Rect(0, ActualHeight - edgeSize, ActualWidth, edgeSize).Contains(p)
-                                               ? Cursors.SizeNWSE
-                                               : Cursors.SizeWE;
+                            ? owner.Cursor
+                            : new Rect(0, 0, ActualWidth, edgeSize).Contains(p)
+                                ? Cursors.SizeNESW
+                                : new Rect(0, ActualHeight - edgeSize, ActualWidth, edgeSize).Contains(p)
+                                    ? Cursors.SizeNWSE
+                                    : Cursors.SizeWE;
                     };
                     break;
                 case GlowDirection.Top:
@@ -108,21 +108,21 @@ namespace Gsof.Xaml.BlankWindow
                     getWidth = (rect) => rect.Width + 4;
                     getHeight = (rect) => glowSize;
                     getHitTestValue = p => new Rect(0, 0, edgeSize - glowSize, ActualHeight).Contains(p)
-                                               ? HitTestValues.HTTOPLEFT
-                                               : new Rect(Width - edgeSize + glowSize, 0, edgeSize - glowSize,
-                                                          ActualHeight).Contains(p)
-                                                     ? HitTestValues.HTTOPRIGHT
-                                                     : HitTestValues.HTTOP;
+                        ? HitTestValues.HTTOPLEFT
+                        : new Rect(Width - edgeSize + glowSize, 0, edgeSize - glowSize,
+                            ActualHeight).Contains(p)
+                            ? HitTestValues.HTTOPRIGHT
+                            : HitTestValues.HTTOP;
                     getCursor = p =>
                     {
                         return (owner.ResizeMode == ResizeMode.NoResize || owner.ResizeMode == ResizeMode.CanMinimize)
-                                    ? owner.Cursor
-                                    : new Rect(0, 0, edgeSize - glowSize, ActualHeight).Contains(p)
-                                         ? Cursors.SizeNWSE
-                                         : new Rect(Width - edgeSize + glowSize, 0, edgeSize - glowSize, ActualHeight).
-                                               Contains(p)
-                                               ? Cursors.SizeNESW
-                                               : Cursors.SizeNS;
+                            ? owner.Cursor
+                            : new Rect(0, 0, edgeSize - glowSize, ActualHeight).Contains(p)
+                                ? Cursors.SizeNWSE
+                                : new Rect(Width - edgeSize + glowSize, 0, edgeSize - glowSize, ActualHeight).
+                                    Contains(p)
+                                    ? Cursors.SizeNESW
+                                    : Cursors.SizeNS;
                     };
                     break;
                 case GlowDirection.Bottom:
@@ -133,21 +133,21 @@ namespace Gsof.Xaml.BlankWindow
                     getWidth = (rect) => rect.Width + 4;
                     getHeight = (rect) => glowSize;
                     getHitTestValue = p => new Rect(0, 0, edgeSize - glowSize, ActualHeight).Contains(p)
-                                               ? HitTestValues.HTBOTTOMLEFT
-                                               : new Rect(Width - edgeSize + glowSize, 0, edgeSize - glowSize,
-                                                          ActualHeight).Contains(p)
-                                                     ? HitTestValues.HTBOTTOMRIGHT
-                                                     : HitTestValues.HTBOTTOM;
+                        ? HitTestValues.HTBOTTOMLEFT
+                        : new Rect(Width - edgeSize + glowSize, 0, edgeSize - glowSize,
+                            ActualHeight).Contains(p)
+                            ? HitTestValues.HTBOTTOMRIGHT
+                            : HitTestValues.HTBOTTOM;
                     getCursor = p =>
                     {
                         return (owner.ResizeMode == ResizeMode.NoResize || owner.ResizeMode == ResizeMode.CanMinimize)
-                                    ? owner.Cursor
-                                    : new Rect(0, 0, edgeSize - glowSize, ActualHeight).Contains(p)
-                                         ? Cursors.SizeNESW
-                                         : new Rect(Width - edgeSize + glowSize, 0, edgeSize - glowSize, ActualHeight).
-                                               Contains(p)
-                                               ? Cursors.SizeNWSE
-                                               : Cursors.SizeNS;
+                            ? owner.Cursor
+                            : new Rect(0, 0, edgeSize - glowSize, ActualHeight).Contains(p)
+                                ? Cursors.SizeNESW
+                                : new Rect(Width - edgeSize + glowSize, 0, edgeSize - glowSize, ActualHeight).
+                                    Contains(p)
+                                    ? Cursors.SizeNWSE
+                                    : Cursors.SizeNS;
                     };
                     break;
             }
@@ -260,11 +260,11 @@ namespace Gsof.Xaml.BlankWindow
         internal void UpdateCore(RECT rect)
         {
             NativeMethods.SetWindowPos(handle, ownerHandle,
-                                       (int)(getLeft(rect)),
-                                       (int)(getTop(rect)),
-                                       (int)(getWidth(rect)),
-                                       (int)(getHeight(rect)),
-                                       SWP.NOACTIVATE | SWP.NOZORDER);
+                (int)(getLeft(rect)),
+                (int)(getTop(rect)),
+                (int)(getWidth(rect)),
+                (int)(getHeight(rect)),
+                SWP.NOACTIVATE | SWP.NOZORDER);
         }
 
         private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)

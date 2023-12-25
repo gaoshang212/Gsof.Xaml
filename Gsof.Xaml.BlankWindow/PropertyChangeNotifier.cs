@@ -75,7 +75,7 @@ namespace Gsof.Xaml.BlankWindow
         /// </summary>
         public static readonly DependencyProperty ValueProperty
             = DependencyProperty.Register("Value", typeof(object), typeof(PropertyChangeNotifier),
-                                          new FrameworkPropertyMetadata(null, new PropertyChangedCallback(OnPropertyChanged)));
+                new FrameworkPropertyMetadata(null, new PropertyChangedCallback(OnPropertyChanged)));
 
         /// <summary>
         /// Returns/sets the value of the property

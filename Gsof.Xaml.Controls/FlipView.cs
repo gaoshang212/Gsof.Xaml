@@ -254,9 +254,9 @@ namespace Gsof.Xaml.Controls
         private bool EnsureTemplateParts()
         {
             return this._currentItem != null &&
-                this._nextItem != null &&
-                this._previousItem != null &&
-                this._partRoot != null;
+                   this._nextItem != null &&
+                   this._previousItem != null &&
+                   this._partRoot != null;
         }
 
         private void OnPreviousCanExecute(object sender, CanExecuteRoutedEventArgs e)

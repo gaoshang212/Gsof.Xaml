@@ -51,12 +51,12 @@ namespace Gsof.Xaml.Extensions
             element.RenderTransform = new TransformGroup()
             {
                 Children = new TransformCollection()
-                        {
-                            new ScaleTransform(),
-                            new SkewTransform(),
-                            new RotateTransform(),
-                            new TranslateTransform(),
-                        }
+                {
+                    new ScaleTransform(),
+                    new SkewTransform(),
+                    new RotateTransform(),
+                    new TranslateTransform(),
+                }
             };
         }
     }

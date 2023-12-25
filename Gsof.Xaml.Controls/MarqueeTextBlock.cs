@@ -1,30 +1,23 @@
 ﻿using System;
 using System.Globalization;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Shapes;
 using Gsof.Xaml.Extensions;
 
 namespace Gsof.Xaml.Controls
 {
 
+    // ReSharper disable once StringLiteralTypo
     [TemplatePart(Name = "MARQUEEGRID")]
     public class MarqueeTextBlock : Control
     {
-        private bool _hasApplyTemplate = false;
-
         private const string MarqueeGridName = "MARQUEEGRID";
-        private const string DisplayTextblock = "DISPLAYTEXT";
-        private const string MarqueeTextblock = "MARQUEETEXT";
-        private FrameworkElement _marqueeGrid;
-        private TextBlock _displayTextblock;
-        //private Path _marqueeTextblock;
-        private TextRender? _marqueeTextblock;
-        private TextTrimming _cacheTextTrimming;
+        private const string MarqueeTextBlockKey = "MARQUEETEXT";
+        private FrameworkElement? _marqueeGrid;
+
+        private TextRender? _marqueeTextBlock;
         private bool _isRunBeforeInit;
 
         private bool _isCreatePath;
@@ -39,19 +32,19 @@ namespace Gsof.Xaml.Controls
             this.Loaded += OnMarqueeTextBlockLoaded;
         }
 
-        public string Text
+        public string? Text
         {
-            get { return (string)GetValue(TextProperty); }
-            set { SetValue(TextProperty, value); }
+            get => (string?)GetValue(TextProperty);
+            set => SetValue(TextProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for Text.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TextProperty =
-            DependencyProperty.Register("Text", typeof(string), typeof(MarqueeTextBlock), new PropertyMetadata("", OnTextPropertyChanged));
+            DependencyProperty.Register(nameof(Text), typeof(string), typeof(MarqueeTextBlock), new PropertyMetadata("", OnTextPropertyChanged));
 
-        private static void OnTextPropertyChanged(DependencyObject p_dependencyObject, DependencyPropertyChangedEventArgs p_dependencyPropertyChangedEventArgs)
+        private static void OnTextPropertyChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
         {
-            var mtb = p_dependencyObject as MarqueeTextBlock;
+            var mtb = dependencyObject as MarqueeTextBlock;
             if (mtb == null)
             {
                 return;
@@ -69,72 +62,59 @@ namespace Gsof.Xaml.Controls
 
         public TextTrimming TextTrimming
         {
-            get { return (TextTrimming)GetValue(TextTrimmingProperty); }
-            set { SetValue(TextTrimmingProperty, value); }
+            get => (TextTrimming)GetValue(TextTrimmingProperty);
+            set => SetValue(TextTrimmingProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for TextTrimming.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TextTrimmingProperty =
-            DependencyProperty.Register("TextTrimming", typeof(TextTrimming), typeof(MarqueeTextBlock), new PropertyMetadata(TextTrimming.CharacterEllipsis));
+            DependencyProperty.Register(nameof(TextTrimming), typeof(TextTrimming), typeof(MarqueeTextBlock), new PropertyMetadata(TextTrimming.CharacterEllipsis));
 
 
 
         public double AnimationTime
         {
-            get { return (double)GetValue(AnimationTimeProperty); }
-            set { SetValue(AnimationTimeProperty, value); }
+            get => (double)GetValue(AnimationTimeProperty);
+            set => SetValue(AnimationTimeProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for AnimationTime.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty AnimationTimeProperty =
-            DependencyProperty.Register("AnimationTime", typeof(double), typeof(MarqueeTextBlock), new PropertyMetadata(1500d));
+            DependencyProperty.Register(nameof(AnimationTime), typeof(double), typeof(MarqueeTextBlock), new PropertyMetadata(1500d));
 
         public bool IsRunAnimation
         {
-            get { return (bool)GetValue(IsRunAnimationProperty); }
-            set { SetValue(IsRunAnimationProperty, value); }
+            get => (bool)GetValue(IsRunAnimationProperty);
+            set => SetValue(IsRunAnimationProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for IsRunRoll.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IsRunAnimationProperty =
-            DependencyProperty.Register("IsRunAnimation", typeof(bool), typeof(MarqueeTextBlock), new PropertyMetadata(false, OnIsRunAnimationPropertyChanged));
+            DependencyProperty.Register(nameof(IsRunAnimation), typeof(bool), typeof(MarqueeTextBlock), new PropertyMetadata(false, OnIsRunAnimationPropertyChanged));
 
         public FlowDirection MoveDirection
         {
-            get { return (FlowDirection)GetValue(MoveDirectionProperty); }
-            set { SetValue(MoveDirectionProperty, value); }
+            get => (FlowDirection)GetValue(MoveDirectionProperty);
+            set => SetValue(MoveDirectionProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for MoveDirection.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MoveDirectionProperty =
-            DependencyProperty.Register("MoveDirection", typeof(FlowDirection), typeof(MarqueeTextBlock), new PropertyMetadata(FlowDirection.RightToLeft));
+            DependencyProperty.Register(nameof(MoveDirection), typeof(FlowDirection), typeof(MarqueeTextBlock), new PropertyMetadata(FlowDirection.RightToLeft));
 
-        private static void OnIsRunAnimationPropertyChanged(DependencyObject p_dependencyObject, DependencyPropertyChangedEventArgs e)
+        private static void OnIsRunAnimationPropertyChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
         {
-            var mtb = p_dependencyObject as MarqueeTextBlock;
-            if (mtb == null)
+            if (dependencyObject is not MarqueeTextBlock)
             {
                 return;
             }
 
-            //if (mtb.IsRunAnimation)
-            //{
-            //    mtb._cacheTextTrimming = mtb.TextTrimming;
-            //    mtb.TextTrimming = TextTrimming.None;
-            //}
-            //else
-            //{
-            //    mtb.TextTrimming = mtb._cacheTextTrimming;
-            //    mtb._cacheTextTrimming = TextTrimming.None;
-            //}
-
-            RunAnimation(p_dependencyObject, e);
+            RunAnimation(dependencyObject);
         }
 
-        private static void RunAnimation(DependencyObject p_dependencyObject, DependencyPropertyChangedEventArgs e)
+        private static void RunAnimation(DependencyObject dependencyObject)
         {
-            var mtb = p_dependencyObject as MarqueeTextBlock;
-            if (mtb == null)
+            if (dependencyObject is not MarqueeTextBlock mtb)
             {
                 return;
             }
@@ -147,16 +127,12 @@ namespace Gsof.Xaml.Controls
             base.OnApplyTemplate();
 
             _marqueeGrid = GetTemplateChild(MarqueeGridName) as FrameworkElement;
-            _displayTextblock = GetTemplateChild(DisplayTextblock) as TextBlock;
-            //_marqueeTextblock = GetTemplateChild(MarqueeTextblock) as Path;
-            _marqueeTextblock = GetTemplateChild(MarqueeTextblock) as TextRender;
+            _marqueeTextBlock = GetTemplateChild(MarqueeTextBlockKey) as TextRender;
 
             CreatePathData();
-
-            _hasApplyTemplate = true;
         }
 
-        protected virtual void RunAnimation(bool p_isStart)
+        protected virtual void RunAnimation(bool isStart)
         {
             if (_marqueeGrid == null)
             {
@@ -169,42 +145,48 @@ namespace Gsof.Xaml.Controls
                 return;
             }
 
+            if (_marqueeTextBlock == null)
+            {
+                return;
+            }
 
-            var tt = _marqueeTextblock.GetRenderTransform<TranslateTransform>();
+            var tt = _marqueeTextBlock.GetRenderTransform<TranslateTransform>();
 
             tt.BeginAnimation(TranslateTransform.XProperty, null);
 
             tt.X = 0;
 
-            if (p_isStart)
+            if (!isStart)
             {
-                var ftc = FormattedTextConverter.ConvertFormattedText(this.Text, this.FontFamily, this.FontSize, this.Foreground);
-                var textWidth = ftc.WidthIncludingTrailingWhitespace;
-
-                if (textWidth < this.ActualHeight)
-                {
-                    this.SetCurrentValue(IsRunAnimationProperty, false);
-                    return;
-                }
-
-                _isCreatePath = true;
-                CreatePathData(true);
-
-                string text = this.Text + "    ";
-
-                var offset = FormattedTextConverter.ConvertFormattedText(text, this.FontFamily, this.FontSize, this.Foreground).WidthIncludingTrailingWhitespace;
-
-                var time = TimeSpan.FromMilliseconds(Math.Abs(offset) / 100 * AnimationTime);
-                var da = MoveDirection == FlowDirection.RightToLeft ? new DoubleAnimation(-offset, time) : new DoubleAnimation(-offset, 0, time);
-                da.RepeatBehavior = RepeatBehavior.Forever;
-
-                tt.BeginAnimation(TranslateTransform.XProperty, da);
+                return;
             }
+
+            var ftc = ConvertFormattedText(this.Text ?? "");
+            var textWidth = ftc.WidthIncludingTrailingWhitespace;
+
+            if (textWidth < _marqueeGrid.ActualWidth)
+            {
+                this.SetCurrentValue(IsRunAnimationProperty, false);
+                return;
+            }
+
+            _isCreatePath = true;
+            CreatePathData(true);
+
+            string text = this.Text + "    ";
+
+            var offset = ConvertFormattedText(text).WidthIncludingTrailingWhitespace;
+
+            var time = TimeSpan.FromMilliseconds(Math.Abs(offset) / 100 * AnimationTime);
+            var da = MoveDirection == FlowDirection.RightToLeft ? new DoubleAnimation(-offset, time) : new DoubleAnimation(-offset, 0, time);
+            da.RepeatBehavior = RepeatBehavior.Forever;
+
+            tt.BeginAnimation(TranslateTransform.XProperty, da);
         }
 
-        protected virtual void CreatePathData(bool p_isTwo = false)
+        protected virtual void CreatePathData(bool isTwo = false)
         {
-            if (_marqueeTextblock == null || !_isCreatePath || this.Text == null)
+            if (_marqueeTextBlock == null || !_isCreatePath || this.Text == null)
             {
                 return;
             }
@@ -213,18 +195,13 @@ namespace Gsof.Xaml.Controls
 
             string text = this.Text;
 
-            if (p_isTwo)
+            if (isTwo)
             {
                 text += "    " + this.Text;
             }
 
-            //_marqueeTextblock.Data = FormattedTextConverter.ConvertFormattedText(text, this.FontFamily,
-            //    this.FontSize, this.Foreground).BuildGeometry(new Point(0, 0));
-
             var ft = ConvertFormattedText(text);
-
-            _marqueeTextblock.FormattedText = ft;
-            //ft.BuildGeometry(new Point(0, 0)).GetFlattenedPathGeometry();
+            _marqueeTextBlock.FormattedText = ft;
 
         }
 
@@ -237,12 +214,20 @@ namespace Gsof.Xaml.Controls
             }
         }
 
-        private FormattedText ConvertFormattedText(string p_string)
+        private FormattedText ConvertFormattedText(string text)
         {
-            Typeface typeface = new Typeface(this.FontFamily, this.FontStyle, this.FontWeight, this.FontStretch);
+            var typeface = new Typeface(this.FontFamily, this.FontStyle, this.FontWeight, this.FontStretch);
 
-            return new FormattedText(p_string, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight,
-                typeface, this.FontSize, this.Foreground);
+#if NET5_0_OR_GREATER
+            var pixelsPerDip = VisualTreeHelper.GetDpi(this).PixelsPerDip;
+            return new FormattedText(text, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight,
+            typeface, this.FontSize, this.Foreground, pixelsPerDip);
+#else
+        return new FormattedText(text, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight,
+            typeface, this.FontSize, this.Foreground);
+#endif
+
+
         }
 
     }
@@ -268,80 +253,6 @@ namespace Gsof.Xaml.Controls
             }
 
             drawingContext.DrawText(FormattedText, new Point(0, 0));
-        }
-    }
-
-    public class FormattedTextConverter : DependencyObject, IValueConverter
-    {
-        public FontFamily FontFamily
-        {
-            get => (FontFamily)GetValue(FontFamilyProperty);
-            set { SetValue(FontFamilyProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for FontFamily.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty FontFamilyProperty =
-            DependencyProperty.Register("FontFamily", typeof(FontFamily), typeof(FormattedTextConverter), new PropertyMetadata(new FontFamily()));
-
-        public double TextBlockHeight
-        {
-            get { return (double)GetValue(TextBlockHeightProperty); }
-            set { SetValue(TextBlockHeightProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for TextBlockHeight.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty TextBlockHeightProperty =
-            DependencyProperty.Register("TextBlockHeight", typeof(double), typeof(FormattedTextConverter), new PropertyMetadata(0d));
-
-
-
-        public double FontSize
-        {
-            get { return (double)GetValue(FontSizeProperty); }
-            set { SetValue(FontSizeProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for FontSize.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty FontSizeProperty =
-            DependencyProperty.Register("FontSize", typeof(double), typeof(FormattedTextConverter));
-
-
-
-
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            if (value == null)
-            {
-                return string.Empty;
-            }
-
-            double fontSize = 12D;
-
-            if (parameter != null)
-            {
-                double.TryParse(parameter.ToString(), out fontSize);
-            }
-
-            return ConvertFormattedText(value.ToString(), FontFamily, fontSize, Brushes.Black).BuildGeometry(new Point(5, 0));
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static FormattedText ConvertFormattedText(string p_string, string p_fontFamily, double p_fontSize, Color p_color)
-        {
-            return ConvertFormattedText(p_string, new FontFamily(p_fontFamily), p_fontSize, new SolidColorBrush(p_color));
-        }
-
-        public static FormattedText ConvertFormattedText(string p_string, FontFamily p_fontFamily, double p_fontSize,
-            Brush p_brushe)
-        {
-            Typeface typeface = new Typeface(p_fontFamily, FontStyles.Normal, FontWeights.Normal, FontStretches.Normal);
-
-            return new FormattedText(p_string, CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
-                typeface, p_fontSize, p_brushe);
         }
     }
 }

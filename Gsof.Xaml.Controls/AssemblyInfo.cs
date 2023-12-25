@@ -10,4 +10,5 @@ using System.Windows.Markup;
                                               // app, or any theme specific resource dictionaries)
 )]
 [assembly: XmlnsDefinition("http://gsof.top", "Gsof.Xaml.Controls")]
+[assembly: XmlnsDefinition("http://gsof.top", "Gsof.Xaml.Controls.Behaviours")]
 [assembly: XmlnsDefinition("http://gsof.top/controls", "Gsof.Xaml.Controls")]

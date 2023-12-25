@@ -6,7 +6,7 @@ namespace Gsof.Xaml.Extensions
 {
     public static class StoryboardExtension
     {
-        public static Task BeginAsync(this Storyboard p_storyboard)
+        public static Task BeginAsync(this Storyboard? p_storyboard)
         {
             var sb = p_storyboard;
             if (sb == null)
