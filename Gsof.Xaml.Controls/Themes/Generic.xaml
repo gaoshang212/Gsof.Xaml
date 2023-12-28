@@ -6,5 +6,6 @@
         <ResourceDictionary Source="/Gsof.Xaml.Controls;component/Themes/NumericUpDown.xaml" />
         <ResourceDictionary Source="/Gsof.Xaml.Controls;component/Themes/FilpView.xaml" />
         <ResourceDictionary Source="/Gsof.Xaml.Controls;component/Themes/Flyout.xaml" />
+        <ResourceDictionary Source="/Gsof.Xaml.Controls;component/Themes/MarqueeTextBlock.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

@@ -42,8 +42,8 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Grid Background="Transparent"
-          gsof:BlankWindow.Draggable="True">
+    <StackPanel Background="Transparent"
+                gsof:BlankWindow.Draggable="True">
         <StackPanel Orientation="Horizontal"
                     VerticalAlignment="Top">
             <TextBlock Foreground="{DynamicResource TitleBrush}">Titile</TextBlock>
@@ -89,5 +89,7 @@
                             Maximum="15"
                             Minimum="10"
                             Value="{Binding Value,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></gsof:NumericUpDown>
-    </Grid>
+
+        <gsof:MarqueeTextBlock Text="测试测试测试测试测试测试" Width="150" Background="Transparent"/>
+    </StackPanel>
 </gsof:BlankWindow>
