@@ -21,7 +21,7 @@ namespace Gsof.Xaml.BlankWindow.Behaviours
             get
             {
                 var blankWindow = this.AssociatedObject as BlankWindow;
-                return blankWindow != null &&  blankWindow.GlowBrush == null;
+                return blankWindow != null && blankWindow.GlowBrush == null;
             }
         }
 
@@ -33,14 +33,15 @@ namespace Gsof.Xaml.BlankWindow.Behaviours
                 return blankWindow != null;
             }
         }
-        
+
         protected override void OnAttached()
         {
             base.OnAttached();
 
-            this.AssociatedObject.SourceInitialized += (o, args) => {
+            this.AssociatedObject.SourceInitialized += (o, args) =>
+            {
                 // No glow effect if UseNoneWindowStyle is true or GlowBrush not set.
-                if (this.IsGlowDisabled)
+                if (this.IsGlowDisabled || this.AssociatedObject == null)
                 {
                     return;
                 }
@@ -61,7 +62,7 @@ namespace Gsof.Xaml.BlankWindow.Behaviours
             {
                 makeGlowVisibleTimer.Stop();
             }
-            if(AssociatedObject.WindowState == WindowState.Normal)
+            if (AssociatedObject.WindowState == WindowState.Normal)
             {
                 var metroWindow = this.AssociatedObject as BlankWindow;
                 var ignoreTaskBar = metroWindow != null && metroWindow.IgnoreTaskbarOnMaximize;
@@ -82,7 +83,7 @@ namespace Gsof.Xaml.BlankWindow.Behaviours
 
         void AssociatedObjectUnloaded(object sender, RoutedEventArgs e)
         {
-            if(makeGlowVisibleTimer != null)
+            if (makeGlowVisibleTimer != null)
             {
                 makeGlowVisibleTimer.Stop();
                 makeGlowVisibleTimer.Tick -= makeGlowVisibleTimer_Tick;
@@ -92,7 +93,7 @@ namespace Gsof.Xaml.BlankWindow.Behaviours
 
         private void makeGlowVisibleTimer_Tick(object sender, EventArgs e)
         {
-            if(makeGlowVisibleTimer != null)
+            if (makeGlowVisibleTimer != null)
             {
                 makeGlowVisibleTimer.Stop();
             }
@@ -121,6 +122,11 @@ namespace Gsof.Xaml.BlankWindow.Behaviours
         {
             // No glow effect if UseNoneWindowStyle is true or GlowBrush not set.
             if (this.IsGlowDisabled)
+            {
+                return;
+            }
+
+            if (this.AssociatedObject == null)
             {
                 return;
             }

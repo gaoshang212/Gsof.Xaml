@@ -24,7 +24,6 @@ namespace Gsof.Xaml.Controls.Behaviours
 
         protected override void OnAttached()
         {
-
             this.AssociatedObject.Click += OnAssociatedObjectClick;
             base.OnAttached();
         }
